@@ -209,9 +209,15 @@ int main(int argc, char *argv[])
     
     // Make circular directory (to itself)
     ///*
-    mydir_entry -> 
-    hashTable[dir_hash - 1] = 
-    mydir_nested_sector;
+    if (dir_hash < HT_SIZE - 1) {
+        mydir_entry -> 
+        hashTable[dir_hash + 1] = 
+        mydir_nested_sector;
+    } else {
+        mydir_entry -> 
+        hashTable[dir_hash - 1] = 
+        mydir_nested_sector;
+    }
   
     mydir_entry -> 
     hashTable[dir_hash] = 
