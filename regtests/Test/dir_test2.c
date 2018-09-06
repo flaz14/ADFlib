@@ -155,31 +155,21 @@ int main(int argc, char *argv[])
     }
 
     adfVolumeInfo(vol);
-
-    cell = list = adfGetDirEnt(vol,vol->curDirPtr);
-    while(cell) {
-        printEntry(cell->content);
-        cell = cell->next;
-    }
-    adfFreeDirList(list);
-
-    putchar('\n');
-    
+  
+  
     //////////////////////////////////////////////
     printf("\n> Start hacking!\n");   
     char* dir_name = "mydir";
     int dir_hash = adfGetHashValue(dir_name, 0);
     printf("Hash for name [%s] is [%d].\n", 
            dir_name, 
-           dir_hash);
-    
+           dir_hash);    
     // Create a directory
     adfCreateDir(vol, vol->curDirPtr, dir_name);
     SECTNUM mydir_sector = myGetSectNum(
         adfGetDirEnt(vol, vol->curDirPtr) 
         -> next 
-        -> content);
-    
+        -> content);   
 	// Create nested directory
     adfCreateDir(vol, mydir_sector, dir_name);
     struct bEntryBlock* mydir_entry = myGetDirEntry(
@@ -190,41 +180,52 @@ int main(int argc, char *argv[])
         adfGetDirEnt(vol, mydir_sector)
         -> content);
     
-    // Make directories with the same name possible
-    mydir_entry->hashTable[dir_hash + 1] = mydir_nested_sector;
-    myWriteDirEntry(vol, mydir_sector, mydir_entry);
-	
     
-        
-        //struct bEntryBlock mydir_entry;
-        //RETCODE on_read_dir;
-
-        
-        //printf("\nBefore creating sub-directory:\n");   
-        //on_read_dir = adfReadEntryBlock(vol, mydir, &mydir_entry);
-        //if (on_read_dir != RC_OK) {
-           //printf("Failed to read entry block for sector [%d].\n", mydir);
-        //}
-        //myPrintEntry(mydir_entry);
+    // Make two directories with the same name possible
+    /*
+    if (dir_hash < HT_SIZE - 1) {
+        mydir_entry -> 
+        hashTable[dir_hash + 1] = 
+        mydir_nested_sector;
+    } else {
+        mydir_entry -> 
+        hashTable[dir_hash - 1] = 
+        mydir_nested_sector;
+    }
+    */ 
+  
+    
+    // Make "infinite" listing of directory
+    /*
+    mydir_entry -> 
+    nextSameHash =
+    mydir_sector;
+  
+    mydir_entry -> 
+    hashTable[dir_hash] = 
+    mydir_sector;
+    */
+  
+    
+    // Make circular directory (to itself)
+    ///*
+    mydir_entry -> 
+    hashTable[dir_hash - 1] = 
+    mydir_nested_sector;
+  
+    mydir_entry -> 
+    hashTable[dir_hash] = 
+    mydir_sector;
+    //*/
+  
+    
+    myWriteDirEntry(vol, mydir_sector, mydir_entry);
 	printf("\n> Finish hacking!\n");
     //////////////////////////////////////////////
 
 
-
-    cell = list = adfGetDirEnt(vol,vol->curDirPtr);
-    while(cell) {
-        printEntry(cell->content);
-        cell = cell->next;
-    }
-    adfFreeDirList(list);
-
-    putchar('\n');
-
     adfUnMount(vol);
     adfUnMountDev(hd);
-
-
     adfEnvCleanUp();
-
     return 0;
 }
