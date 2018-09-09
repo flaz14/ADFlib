@@ -1,7 +1,11 @@
-!!!
-This fork exists just for playing with OFS in the scope of article for Downrade e-journal (http://dgmag.in/). So the 
-code in this repo can be broken.
-!!!
+WARNING!!!
+
+This fork exists just for playing with OFS in the scope of article for 
+Downrade e-journal (http://dgmag.in/). So the code in this repo can 
+be broken!
+
+----------------------------------------------------------------------
+
 
 The ADFlib is a free, portable and open implementation of the Amiga filesystem.
 
