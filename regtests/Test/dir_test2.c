@@ -382,8 +382,7 @@ int main(int argc, char *argv[])
   
     mydir_entry -> 
     hashTable[dir_hash] = 
-    mydir_sector;
-    */
+    mydir_sector;*/
     //
   
     
