@@ -338,40 +338,43 @@ int main(int argc, char *argv[])
 
     // Make two directories with 
     // the same name possible.
-    /*
-    if (dir_hash < HT_SIZE - 1) {
+    /*if (dir_hash < HT_SIZE - 1) 
+    {
         mydir_entry -> 
         hashTable[dir_hash + 1] = 
         mydir_nested_sector;
-    } else {
+    } 
+    else 
+    {
         mydir_entry -> 
         hashTable[dir_hash - 1] = 
         mydir_nested_sector;
-    }
-    */ 
-  
+    }*/
+    //
+    
     
     // Make "infinite" listing 
     // of directory.
-    /*
-    mydir_entry -> 
+    /*mydir_entry -> 
     nextSameHash = 
     mydir_sector;
   
     mydir_entry -> 
     hashTable[dir_hash] = 
-    mydir_sector;
-    */
-  
+    mydir_sector;*/
+    //
+    
     
     // Make circular directory 
     // (link the directory to itself)
-    /*
-    if (dir_hash < HT_SIZE - 1) {
+    /*if (dir_hash < HT_SIZE - 1) 
+    {
         mydir_entry -> 
         hashTable[dir_hash + 1] = 
         mydir_nested_sector;
-    } else {
+    } 
+    else 
+    {
         mydir_entry -> 
         hashTable[dir_hash - 1] = 
         mydir_nested_sector;
@@ -381,6 +384,7 @@ int main(int argc, char *argv[])
     hashTable[dir_hash] = 
     mydir_sector;
     */
+    //
   
     
     myWriteDirEntry(vol, 
